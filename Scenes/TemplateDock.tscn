@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhy6uil3ks75h"]
+
+[ext_resource type="Texture2D" uid="uid://ctjmc0lvqchfa" path="res://addons/TemplateManager/Images/plus white.png" id="1_a0u6q"]
+[ext_resource type="Texture2D" uid="uid://bfxgf7ub3w8dd" path="res://addons/TemplateManager/Images/plus blue.png" id="2_v0gqr"]
+[ext_resource type="Texture2D" uid="uid://bqal3va04s6m5" path="res://addons/TemplateManager/Images/plus gray.png" id="3_wygq0"]
+[ext_resource type="Script" path="res://addons/TemplateManager/Code/AddButton.gd" id="4_wurdq"]
+[ext_resource type="PackedScene" uid="uid://72fhx3u2t68e" path="res://addons/TemplateManager/Scenes/BISceneUI.tscn" id="5_1etg0"]
+[ext_resource type="Script" path="res://addons/TemplateManager/Code/BIDoubleClick.gd" id="6_xyktx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2v75s"]
+
+[node name="TemplateDock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Bottom" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0540123
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.14902, 0.180392, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Top" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.0540123
+grow_horizontal = 2
+color = Color(0.211765, 0.239216, 0.290196, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.0540123
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacing" type="Panel" parent="Buttons"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
+metadata/_edit_use_anchors_ = true
+
+[node name="AddButton" type="TextureButton" parent="Buttons"]
+custom_minimum_size = Vector2(20, 35)
+layout_mode = 2
+tooltip_text = "Add Scene To Template Dock"
+texture_normal = ExtResource("1_a0u6q")
+texture_pressed = ExtResource("2_v0gqr")
+texture_hover = ExtResource("3_wygq0")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_wurdq")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Spacing" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
+metadata/_edit_use_anchors_ = true
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = "[b][u]Built-In[/u][/b]"
+fit_content = true
+
+[node name="3DPlayerController" parent="VBoxContainer" instance=ExtResource("5_1etg0")]
+layout_mode = 2
+
+[node name="Margin" parent="VBoxContainer/3DPlayerController" index="0"]
+tooltip_text = "3DPlayerController
+Type: Scene
+Path: res://TemplateManager/Scenes/Templates/3DPlayerController.dat"
+script = ExtResource("6_xyktx")
+
+[node name="Label" parent="VBoxContainer/3DPlayerController/Margin/Info" index="1"]
+text = "3DPlayerController"
+
+[node name="2DPlayerController" parent="VBoxContainer" instance=ExtResource("5_1etg0")]
+layout_mode = 2
+
+[node name="Margin" parent="VBoxContainer/2DPlayerController" index="0"]
+tooltip_text = "2DPlayerController
+Type: Scene
+Path: res://TemplateManager/Scenes/Templates/2DPlayerController.dat"
+script = ExtResource("6_xyktx")
+
+[node name="Label" parent="VBoxContainer/2DPlayerController/Margin/Info" index="1"]
+text = "2DPlayerController"
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b][u]Add-On[/u][/b]"
+fit_content = true
+
+[connection signal="pressed" from="Buttons/AddButton" to="Buttons/AddButton" method="OnPressed"]
+
+[editable path="VBoxContainer/3DPlayerController"]
+[editable path="VBoxContainer/2DPlayerController"]

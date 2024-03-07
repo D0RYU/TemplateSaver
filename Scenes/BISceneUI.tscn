@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://72fhx3u2t68e"]
+
+[ext_resource type="Script" path="res://addons/TemplateManager/Code/DoubleClick.gd" id="1_qbehq"]
+[ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateManager/Images/PackedScene.png" id="2_d3i46"]
+
+[node name="SceneUI" type="HBoxContainer"]
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+script = ExtResource("1_qbehq")
+
+[node name="Info" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Margin/Info"]
+modulate = Color(0, 0.623529, 1, 1)
+layout_mode = 2
+texture = ExtResource("2_d3i46")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Margin/Info"]
+layout_mode = 2
+mouse_filter = 1
+text = "Scene 1
+"
+
+[connection signal="mouse_entered" from="Margin" to="Margin" method="MouseEntered"]
+[connection signal="mouse_exited" from="Margin" to="Margin" method="MouseExited"]
