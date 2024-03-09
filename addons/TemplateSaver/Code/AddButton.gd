@@ -1,8 +1,8 @@
 @tool
 extends TextureButton
 
-var FileManagerScene: PackedScene = preload("res://addons/TemplateManager/Scenes/FileManager.tscn")
-var SceneUI: PackedScene = preload("res://addons/TemplateManager/Scenes/SceneUI.tscn")
+var FileManagerScene: PackedScene = preload("res://addons/TemplateSaver/Scenes/FileManager.tscn")
+var SceneUI: PackedScene = preload("res://addons/TemplateSaver/Scenes/SceneUI.tscn")
 
 @onready var SceneContainer: VBoxContainer = get_node("../../VBoxContainer")
 

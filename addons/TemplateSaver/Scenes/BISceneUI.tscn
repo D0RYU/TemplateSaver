@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://72fhx3u2t68e"]
 
-[ext_resource type="Script" path="res://addons/TemplateManager/Code/DoubleClick.gd" id="1_qbehq"]
-[ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateManager/Images/PackedScene.png" id="2_d3i46"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DoubleClick.gd" id="1_qbehq"]
+[ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="2_d3i46"]
 
 [node name="SceneUI" type="HBoxContainer"]
 mouse_filter = 2

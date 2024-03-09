@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://vtxf12f6x00y"]
 
-[ext_resource type="Script" path="res://addons/TemplateManager/Code/DoubleClick.gd" id="1_finxk"]
-[ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateManager/Images/PackedScene.png" id="2_fo4yx"]
-[ext_resource type="Script" path="res://addons/TemplateManager/Code/RemoveScene.gd" id="3_84erj"]
-[ext_resource type="Texture2D" uid="uid://cf0yrmhsicvjo" path="res://addons/TemplateManager/Images/red-trash-can-icon.png" id="3_q5l51"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DoubleClick.gd" id="1_finxk"]
+[ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="2_fo4yx"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/RemoveScene.gd" id="3_84erj"]
+[ext_resource type="Texture2D" uid="uid://cf0yrmhsicvjo" path="res://addons/TemplateSaver/Images/red-trash-can-icon.png" id="3_q5l51"]
 
 [node name="SceneUI" type="HBoxContainer"]
 mouse_filter = 2

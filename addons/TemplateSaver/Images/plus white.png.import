@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://addons/TemplateManager/Images/plus white.png"
+source_file="res://addons/TemplateSaver/Images/plus white.png"
 dest_files=["res://.godot/imported/plus white.png-ec447e501968a0b407e54f53e5c9ef2f.ctex"]
 
 [params]

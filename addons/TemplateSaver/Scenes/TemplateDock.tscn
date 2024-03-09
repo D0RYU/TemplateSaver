@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://bhy6uil3ks75h"]
 
-[ext_resource type="Texture2D" uid="uid://ctjmc0lvqchfa" path="res://addons/TemplateManager/Images/plus white.png" id="1_a0u6q"]
-[ext_resource type="Texture2D" uid="uid://bfxgf7ub3w8dd" path="res://addons/TemplateManager/Images/plus blue.png" id="2_v0gqr"]
-[ext_resource type="Texture2D" uid="uid://bqal3va04s6m5" path="res://addons/TemplateManager/Images/plus gray.png" id="3_wygq0"]
-[ext_resource type="Script" path="res://addons/TemplateManager/Code/AddButton.gd" id="4_wurdq"]
-[ext_resource type="PackedScene" uid="uid://72fhx3u2t68e" path="res://addons/TemplateManager/Scenes/BISceneUI.tscn" id="5_1etg0"]
-[ext_resource type="Script" path="res://addons/TemplateManager/Code/BIDoubleClick.gd" id="6_xyktx"]
+[ext_resource type="Texture2D" uid="uid://ctjmc0lvqchfa" path="res://addons/TemplateSaver/Images/plus white.png" id="1_a0u6q"]
+[ext_resource type="Texture2D" uid="uid://bfxgf7ub3w8dd" path="res://addons/TemplateSaver/Images/plus blue.png" id="2_v0gqr"]
+[ext_resource type="Texture2D" uid="uid://bqal3va04s6m5" path="res://addons/TemplateSaver/Images/plus gray.png" id="3_wygq0"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/AddButton.gd" id="4_wurdq"]
+[ext_resource type="PackedScene" uid="uid://72fhx3u2t68e" path="res://addons/TemplateSaver/Scenes/BISceneUI.tscn" id="5_1etg0"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/BIDoubleClick.gd" id="6_xyktx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2v75s"]
 
@@ -94,7 +94,7 @@ layout_mode = 2
 [node name="Margin" parent="VBoxContainer/3DPlayerController" index="0"]
 tooltip_text = "3DPlayerController
 Type: Scene
-Path: res://TemplateManager/Scenes/Templates/3DPlayerController.dat"
+Path: res://TemplateSaver/Scenes/Templates/3DPlayerController.dat"
 script = ExtResource("6_xyktx")
 
 [node name="Label" parent="VBoxContainer/3DPlayerController/Margin/Info" index="1"]
@@ -106,7 +106,7 @@ layout_mode = 2
 [node name="Margin" parent="VBoxContainer/2DPlayerController" index="0"]
 tooltip_text = "2DPlayerController
 Type: Scene
-Path: res://TemplateManager/Scenes/Templates/2DPlayerController.dat"
+Path: res://TemplateSaver/Scenes/Templates/2DPlayerController.dat"
 script = ExtResource("6_xyktx")
 
 [node name="Label" parent="VBoxContainer/2DPlayerController/Margin/Info" index="1"]

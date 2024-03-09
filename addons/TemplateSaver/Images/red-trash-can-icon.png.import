@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://addons/TemplateManager/Images/red-trash-can-icon.png"
+source_file="res://addons/TemplateSaver/Images/red-trash-can-icon.png"
 dest_files=["res://.godot/imported/red-trash-can-icon.png-187106c1c0a3c9158147a28987970380.ctex"]
 
 [params]

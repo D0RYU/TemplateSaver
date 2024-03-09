@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-var DockScene: PackedScene = preload("res://addons/TemplateManager/Scenes/TemplateDock.tscn")
+var DockScene: PackedScene = preload("res://addons/TemplateSaver/Scenes/TemplateDock.tscn")
 var Dock: Control
 
 func _enter_tree() -> void:
@@ -10,8 +10,8 @@ func _enter_tree() -> void:
 	if !Directory.dir_exists("Godot"):
 		Directory.make_dir("Godot")
 	
-	add_autoload_singleton.call_deferred("TemplateData", "res://addons/TemplateManager/Code/TemplateData.gd")
-	add_autoload_singleton.call_deferred("Dialog", "res://addons/TemplateManager/Code/Dialog.gd")
+	add_autoload_singleton.call_deferred("TemplateData", "res://addons/TemplateSaver/Code/TemplateData.gd")
+	add_autoload_singleton.call_deferred("Dialog", "res://addons/TemplateSaver/Code/Dialog.gd")
 	
 	while !get_tree().root.has_node("TemplateData") and !get_tree().root.has_node("Dialog"):
 		await get_tree().create_timer(0).timeout

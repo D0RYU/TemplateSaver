@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://addons/TemplateManager/Images/PackedScene.png"
+source_file="res://addons/TemplateSaver/Images/PackedScene.png"
 dest_files=["res://.godot/imported/PackedScene.png-9a0d5292efcb2177642dc6daaade79c1.ctex"]
 
 [params]

@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://addons/TemplateManager/Images/plus.png"
+source_file="res://addons/TemplateSaver/Images/plus.png"
 dest_files=["res://.godot/imported/plus.png-4061963eda9cf4736bd305b72162025f.ctex"]
 
 [params]

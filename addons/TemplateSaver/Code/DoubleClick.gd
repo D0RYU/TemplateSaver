@@ -1,7 +1,7 @@
 @tool
 extends MarginContainer
 
-var FileManagerScene: PackedScene = preload("res://addons/TemplateManager/Scenes/FileManager.tscn")
+var FileManagerScene: PackedScene = preload("res://addons/TemplateSaver/Scenes/FileManager.tscn")
 
 @onready var SceneLabel: Label = get_node("Info/Label")
 

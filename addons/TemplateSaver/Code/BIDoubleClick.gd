@@ -1,15 +1,15 @@
 @tool
 extends MarginContainer
 
-var FileManagerScene: PackedScene = preload("res://addons/TemplateManager/Scenes/FileManager.tscn")
+var FileManagerScene: PackedScene = preload("res://addons/TemplateSaver/Scenes/FileManager.tscn")
 
 @onready var SceneLabel: Label = get_node("Info/Label")
-@onready var ScenePath: String = "res://addons/TemplateManager/Scenes/Templates/" + SceneLabel.text + ".dat"
+@onready var ScenePath: String = "res://addons/TemplateSaver/Scenes/Templates/" + SceneLabel.text + ".dat"
 
 var MouseOver: bool = false
 
 func _ready():
-	tooltip_text = SceneLabel.text + "\nType: Scene\nPath: res://TemplateManager/Scenes/Templates/" + SceneLabel.text + ".dat"
+	tooltip_text = SceneLabel.text + "\nType: Scene\nPath: res://TemplateSaver/Scenes/Templates/" + SceneLabel.text + ".dat"
 
 func _input(Event: InputEvent) -> void:
 	if MouseOver and Event is InputEventMouseButton:
