@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf4njkna4ek05"]
+
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DragSettings.gd" id="1_k343o"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/SettingsManager.gd" id="1_r2qvv"]
+[ext_resource type="Texture2D" uid="uid://3msh86x0yl68" path="res://addons/TemplateSaver/Images/close_icon_red.png" id="2_okx2o"]
+[ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/close_icon_blue.png" id="3_vbujs"]
+[ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/close_icon_gray.png" id="4_nl2j5"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/CloseSettings.gd" id="5_6nymi"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(346, 462)
+layout_mode = 3
+anchor_left = 0.349826
+anchor_top = 0.143519
+anchor_right = 0.650174
+anchor_bottom = 0.856481
+offset_top = 0.000297546
+offset_bottom = -0.000305176
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Highlight" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.999997
+anchor_bottom = 0.0757576
+grow_horizontal = 2
+color = Color(0.435294, 0.478431, 0.560784, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Outline" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0735931
+anchor_right = 0.999997
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Bottom" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(326, 407)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0289017
+anchor_top = 0.0909091
+anchor_right = 0.971096
+anchor_bottom = 0.978355
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.14902, 0.180392, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Settings" type="VBoxContainer" parent="Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r2qvv")
+metadata/_edit_use_anchors_ = true
+
+[node name="DataPath" type="Label" parent="Bottom/Settings"]
+layout_mode = 2
+text = "DataPath: \"\""
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/Settings"]
+layout_mode = 2
+
+[node name="SceneIconColor" type="Label" parent="Bottom/Settings/HBoxContainer"]
+layout_mode = 2
+text = "Scene Icon Color:"
+
+[node name="ColorRect" type="ColorRect" parent="Bottom/Settings/HBoxContainer"]
+custom_minimum_size = Vector2(23, 23)
+layout_mode = 2
+color = Color(0, 0.54902, 0.878431, 1)
+
+[node name="Shadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0289017
+anchor_top = 0.0735931
+anchor_right = 0.971096
+anchor_bottom = 0.0909091
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0980392, 0.113725, 0.137255, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Top" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0115607
+anchor_top = 0.00865801
+anchor_right = 0.991327
+anchor_bottom = 0.0735931
+grow_horizontal = 2
+color = Color(0.211765, 0.239216, 0.290196, 1)
+script = ExtResource("1_k343o")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Top"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.1
+anchor_right = 1.0
+anchor_bottom = 0.966666
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 23
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Close" type="TextureButton" parent="Top"]
+custom_minimum_size = Vector2(35, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.896755
+anchor_top = 0.0833336
+anchor_right = 1.0
+anchor_bottom = 0.916667
+offset_top = 0.403218
+offset_bottom = -0.403219
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Add Scene To Template Dock"
+texture_normal = ExtResource("2_okx2o")
+texture_pressed = ExtResource("3_vbujs")
+texture_hover = ExtResource("4_nl2j5")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("5_6nymi")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="Highlight" to="Top" method="MouseEntered"]
+[connection signal="mouse_exited" from="Highlight" to="Top" method="MouseExited"]
+[connection signal="mouse_entered" from="Outline" to="Top" method="MouseEntered"]
+[connection signal="mouse_exited" from="Outline" to="Top" method="MouseExited"]
+[connection signal="mouse_entered" from="Shadow" to="Top" method="MouseEntered"]
+[connection signal="mouse_exited" from="Shadow" to="Top" method="MouseExited"]
+[connection signal="mouse_entered" from="Top" to="Top" method="MouseEntered"]
+[connection signal="mouse_exited" from="Top" to="Top" method="MouseExited"]
+[connection signal="pressed" from="Top/Close" to="Top/Close" method="OnPressed"]

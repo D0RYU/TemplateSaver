@@ -17,12 +17,16 @@ func _input(Event: InputEvent) -> void:
 			EditorInterface.get_base_control().add_child.call_deferred(FileManager)
 
 func FileSelected(Path: String) -> void:
-	if Path.get_extension() == "tscn":
-		var Scene: PackedScene = TemplateData.Data[SceneLabel.text].Scene
+	if get_tree().root.has_node("TemplateData") and get_tree().root.has_node("Dialog"):
+		var TreeTemplateData: Object = get_tree().root.get_node("TemplateData")
+		var TreeDialog: Object = get_tree().root.get_node("Dialog")
 		
-		ResourceSaver.save(Scene, Path)
-	else:
-		Dialog.NewAlert("invalid save, tscn expected")
+		if Path.get_extension() == "tscn":
+			var Scene: PackedScene = TreeTemplateData.Data[SceneLabel.text].Scene
+			
+			ResourceSaver.save(Scene, Path)
+		else:
+			TreeDialog.NewAlert("invalid save, tscn expected")
 
 func MouseEntered() -> void:
 	MouseOver = true
