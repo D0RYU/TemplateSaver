@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf4njkna4ek05"]
+[gd_scene load_steps=14 format=3 uid="uid://cf4njkna4ek05"]
 
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DragSettings.gd" id="1_k343o"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/SettingsManager.gd" id="1_r2qvv"]
-[ext_resource type="Texture2D" uid="uid://3msh86x0yl68" path="res://addons/TemplateSaver/Images/close_icon_red.png" id="2_okx2o"]
-[ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/close_icon_blue.png" id="3_vbujs"]
-[ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/close_icon_gray.png" id="4_nl2j5"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/CloseSettings.gd" id="5_6nymi"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/SettingsColor.gd" id="1_mdgqf"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/SettingsManager.gd" id="1_vd0k8"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/DragSettings.gd" id="2_ehhdn"]
+[ext_resource type="Texture2D" uid="uid://i1d60kad2oj" path="res://addons/TemplateSaver/Images/ResetPathIcon/reset white.png" id="3_um1a1"]
+[ext_resource type="Texture2D" uid="uid://be5wd1fb4jctf" path="res://addons/TemplateSaver/Images/ResetPathIcon/reset blue.png" id="4_1og6j"]
+[ext_resource type="Texture2D" uid="uid://dl0b0cfabm0oi" path="res://addons/TemplateSaver/Images/ResetPathIcon/reset gray.png" id="5_vww0t"]
+[ext_resource type="Texture2D" uid="uid://bovvemf5tgpvq" path="res://addons/TemplateSaver/Images/OpenFolderIcon/open white.png" id="6_0dh82"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/CloseSettings.gd" id="6_enwyh"]
+[ext_resource type="Texture2D" uid="uid://dlvlmxcsvhbdk" path="res://addons/TemplateSaver/Images/OpenFolderIcon/open blue.png" id="7_5ysrs"]
+[ext_resource type="Texture2D" uid="uid://bcwkjcjlah0wl" path="res://addons/TemplateSaver/Images/OpenFolderIcon/open gray.png" id="8_rm1rd"]
+[ext_resource type="Texture2D" uid="uid://3msh86x0yl68" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_red.png" id="10_8sv2e"]
+[ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_blue.png" id="11_trvcf"]
+[ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_gray.png" id="12_xv6cd"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("top", "bottom", "highlight", "shadow", "outline")]
 custom_minimum_size = Vector2(346, 462)
 layout_mode = 3
 anchor_left = 0.349826
@@ -18,6 +25,12 @@ offset_top = 0.000297546
 offset_bottom = -0.000305176
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mdgqf")
+top = NodePath("Top")
+bottom = NodePath("Bottom")
+highlight = NodePath("Highlight")
+shadow = NodePath("Shadow")
+outline = NodePath("Outline")
 metadata/_edit_use_anchors_ = true
 
 [node name="Highlight" type="ColorRect" parent="."]
@@ -27,7 +40,7 @@ anchors_preset = -1
 anchor_right = 0.999997
 anchor_bottom = 0.0757576
 grow_horizontal = 2
-color = Color(0.435294, 0.478431, 0.560784, 1)
+color = Color(0.424807, 0.748603, 0.900824, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Outline" type="ColorRect" parent="."]
@@ -38,7 +51,7 @@ anchor_right = 0.999997
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.0470588, 0.107843, 0.109804, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Bottom" type="ColorRect" parent="."]
@@ -51,7 +64,7 @@ anchor_right = 0.971096
 anchor_bottom = 0.978355
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.129412, 0.14902, 0.180392, 1)
+color = Color(0.0705882, 0.161765, 0.164706, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Settings" type="VBoxContainer" parent="Bottom"]
@@ -61,24 +74,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_r2qvv")
-metadata/_edit_use_anchors_ = true
+script = ExtResource("1_vd0k8")
 
-[node name="DataPath" type="Label" parent="Bottom/Settings"]
-layout_mode = 2
-text = "DataPath: \"\""
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottom/Settings"]
+[node name="PathContainer" type="HBoxContainer" parent="Bottom/Settings"]
 layout_mode = 2
 
-[node name="SceneIconColor" type="Label" parent="Bottom/Settings/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="Bottom/Settings/PathContainer"]
 layout_mode = 2
-text = "Scene Icon Color:"
 
-[node name="ColorRect" type="ColorRect" parent="Bottom/Settings/HBoxContainer"]
-custom_minimum_size = Vector2(23, 23)
+[node name="DataPath" type="Label" parent="Bottom/Settings/PathContainer"]
 layout_mode = 2
-color = Color(0, 0.54902, 0.878431, 1)
+text = "DataPath:"
+vertical_alignment = 1
+
+[node name="Reset" type="TextureButton" parent="Bottom/Settings/PathContainer"]
+visible = false
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+texture_normal = ExtResource("3_um1a1")
+texture_pressed = ExtResource("4_1og6j")
+texture_hover = ExtResource("5_vww0t")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Path" type="Button" parent="Bottom/Settings/PathContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Open Data Path
+Path: C:/Users/theni/AppData/Roaming/Godot/TemplateSaver//Templates/"
+mouse_filter = 1
+text = "C:/Users/theni/AppData/Roaming/Godot/TemplateSaver//Templates/"
+text_overrun_behavior = 1
+
+[node name="Open" type="TextureButton" parent="Bottom/Settings/PathContainer"]
+custom_minimum_size = Vector2(21.39, 0)
+layout_mode = 2
+tooltip_text = "Open Directory"
+texture_normal = ExtResource("6_0dh82")
+texture_pressed = ExtResource("7_5ysrs")
+texture_hover = ExtResource("8_rm1rd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ColorRect2" type="ColorRect" parent="Bottom/Settings/PathContainer"]
+layout_mode = 2
 
 [node name="Shadow" type="ColorRect" parent="."]
 layout_mode = 1
@@ -89,7 +128,7 @@ anchor_right = 0.971096
 anchor_bottom = 0.0909091
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0980392, 0.113725, 0.137255, 1)
+color = Color(0.0564706, 0.129412, 0.131765, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Top" type="ColorRect" parent="."]
@@ -100,8 +139,8 @@ anchor_top = 0.00865801
 anchor_right = 0.991327
 anchor_bottom = 0.0735931
 grow_horizontal = 2
-color = Color(0.211765, 0.239216, 0.290196, 1)
-script = ExtResource("1_k343o")
+color = Color(0.0941176, 0.215686, 0.219608, 1)
+script = ExtResource("2_ehhdn")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Top"]
@@ -131,18 +170,21 @@ offset_bottom = -0.403219
 grow_horizontal = 0
 grow_vertical = 2
 tooltip_text = "Add Scene To Template Dock"
-texture_normal = ExtResource("2_okx2o")
-texture_pressed = ExtResource("3_vbujs")
-texture_hover = ExtResource("4_nl2j5")
+texture_normal = ExtResource("10_8sv2e")
+texture_pressed = ExtResource("11_trvcf")
+texture_hover = ExtResource("12_xv6cd")
 ignore_texture_size = true
 stretch_mode = 5
-script = ExtResource("5_6nymi")
+script = ExtResource("6_enwyh")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="Highlight" to="Top" method="MouseEntered"]
 [connection signal="mouse_exited" from="Highlight" to="Top" method="MouseExited"]
 [connection signal="mouse_entered" from="Outline" to="Top" method="MouseEntered"]
 [connection signal="mouse_exited" from="Outline" to="Top" method="MouseExited"]
+[connection signal="pressed" from="Bottom/Settings/PathContainer/Reset" to="Bottom/Settings" method="ResetDataPath"]
+[connection signal="pressed" from="Bottom/Settings/PathContainer/Path" to="Bottom/Settings" method="ChangeDataPath"]
+[connection signal="pressed" from="Bottom/Settings/PathContainer/Open" to="Bottom/Settings" method="DataPathOpened"]
 [connection signal="mouse_entered" from="Shadow" to="Top" method="MouseEntered"]
 [connection signal="mouse_exited" from="Shadow" to="Top" method="MouseExited"]
 [connection signal="mouse_entered" from="Top" to="Top" method="MouseEntered"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://72fhx3u2t68e"]
 
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DoubleClick.gd" id="1_qbehq"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SceneUI/BuiltIn/BIDoubleClick.gd" id="1_xlxnk"]
 [ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="2_d3i46"]
 
 [node name="SceneUI" type="HBoxContainer"]
@@ -8,15 +8,19 @@ mouse_filter = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
+tooltip_text = "Scene 1
+
+Type: Scene
+Path: res://TemplateSaver/Scenes/Templates/Scene 1
+.dat"
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
-script = ExtResource("1_qbehq")
+script = ExtResource("1_xlxnk")
 
 [node name="Info" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="Margin/Info"]
-modulate = Color(0, 0.623529, 1, 1)
 layout_mode = 2
 texture = ExtResource("2_d3i46")
 stretch_mode = 5

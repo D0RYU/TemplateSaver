@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://vtxf12f6x00y"]
 
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DoubleClick.gd" id="1_finxk"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SceneUI/DoubleClick.gd" id="1_rknon"]
 [ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="2_fo4yx"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/RemoveScene.gd" id="3_84erj"]
 [ext_resource type="Texture2D" uid="uid://cf0yrmhsicvjo" path="res://addons/TemplateSaver/Images/red-trash-can-icon.png" id="3_q5l51"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SceneUI/RemoveScene.gd" id="4_m66ri"]
 
 [node name="SceneUI" type="HBoxContainer"]
 mouse_filter = 2
@@ -12,13 +12,12 @@ mouse_filter = 2
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
-script = ExtResource("1_finxk")
+script = ExtResource("1_rknon")
 
 [node name="Info" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="Margin/Info"]
-modulate = Color(0, 0.623529, 1, 1)
 layout_mode = 2
 texture = ExtResource("2_fo4yx")
 stretch_mode = 5
@@ -35,7 +34,7 @@ layout_mode = 2
 texture_normal = ExtResource("3_q5l51")
 ignore_texture_size = true
 stretch_mode = 5
-script = ExtResource("3_84erj")
+script = ExtResource("4_m66ri")
 
 [connection signal="mouse_entered" from="Margin" to="Margin" method="MouseEntered"]
 [connection signal="mouse_exited" from="Margin" to="Margin" method="MouseExited"]

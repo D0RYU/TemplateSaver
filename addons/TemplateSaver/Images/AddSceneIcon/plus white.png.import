@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctjmc0lvqchfa"
-path="res://.godot/imported/plus white.png-ec447e501968a0b407e54f53e5c9ef2f.ctex"
+path="res://.godot/imported/plus white.png-863a313baa2fc9bb8f9e5f7886c5226a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TemplateSaver/Images/plus white.png"
-dest_files=["res://.godot/imported/plus white.png-ec447e501968a0b407e54f53e5c9ef2f.ctex"]
+source_file="res://addons/TemplateSaver/Images/AddSceneIcon/plus white.png"
+dest_files=["res://.godot/imported/plus white.png-863a313baa2fc9bb8f9e5f7886c5226a.ctex"]
 
 [params]
 

@@ -10,4 +10,3 @@ dialog_hide_on_ok = true
 mode_overrides_title = false
 file_mode = 0
 filters = PackedStringArray("*.tscn")
-show_hidden_files = true

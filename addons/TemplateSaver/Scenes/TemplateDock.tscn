@@ -1,152 +1,200 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhy6uil3ks75h"]
+[gd_scene load_steps=17 format=3 uid="uid://bhy6uil3ks75h"]
 
-[ext_resource type="Texture2D" uid="uid://ctjmc0lvqchfa" path="res://addons/TemplateSaver/Images/plus white.png" id="1_a0u6q"]
-[ext_resource type="Texture2D" uid="uid://bfxgf7ub3w8dd" path="res://addons/TemplateSaver/Images/plus blue.png" id="2_v0gqr"]
-[ext_resource type="Texture2D" uid="uid://bqal3va04s6m5" path="res://addons/TemplateSaver/Images/plus gray.png" id="3_wygq0"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/AddButton.gd" id="4_wurdq"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/DockColor.gd" id="1_gmawc"]
+[ext_resource type="Texture2D" uid="uid://ctjmc0lvqchfa" path="res://addons/TemplateSaver/Images/AddSceneIcon/plus white.png" id="2_gjpq1"]
+[ext_resource type="Texture2D" uid="uid://bfxgf7ub3w8dd" path="res://addons/TemplateSaver/Images/AddSceneIcon/plus blue.png" id="3_a8oc2"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/AddButton.gd" id="4_0x3ol"]
+[ext_resource type="Texture2D" uid="uid://bqal3va04s6m5" path="res://addons/TemplateSaver/Images/AddSceneIcon/plus gray.png" id="4_myae2"]
 [ext_resource type="PackedScene" uid="uid://72fhx3u2t68e" path="res://addons/TemplateSaver/Scenes/BISceneUI.tscn" id="5_1etg0"]
-[ext_resource type="Texture2D" uid="uid://lhel21v2ygf2" path="res://addons/TemplateSaver/Images/settings_cog_icon_178923.png" id="5_dtsgy"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/OpenSettings.gd" id="6_2py3s"]
-[ext_resource type="Texture2D" uid="uid://013bdefyu5u5" path="res://addons/TemplateSaver/Images/settings_cog_blue.png" id="6_5pmyy"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/BIDoubleClick.gd" id="6_xyktx"]
-[ext_resource type="Texture2D" uid="uid://cfjiilbwrgkru" path="res://addons/TemplateSaver/Images/settings_cog_gray.png" id="7_svx7x"]
+[ext_resource type="Texture2D" uid="uid://lhel21v2ygf2" path="res://addons/TemplateSaver/Images/SettingsIcon/settings_cog_icon_178923.png" id="6_huyll"]
+[ext_resource type="Texture2D" uid="uid://013bdefyu5u5" path="res://addons/TemplateSaver/Images/SettingsIcon/settings_cog_blue.png" id="7_4gyts"]
+[ext_resource type="Texture2D" uid="uid://cfjiilbwrgkru" path="res://addons/TemplateSaver/Images/SettingsIcon/settings_cog_gray.png" id="8_dxqh0"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/OpenSettings.gd" id="8_orovv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2v75s"]
 
-[node name="TemplateDock" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3egsg"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.0941176, 0.215686, 0.219608, 1)
+border_width_top = 2
+border_color = Color(0.424807, 0.748603, 0.900824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t8sy"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.117647, 0.269607, 0.27451, 1)
+border_width_top = 2
+border_color = Color(0.424807, 0.748603, 0.900824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhmnb"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.0564706, 0.129412, 0.131765, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3mlxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qoqkb"]
+
+[node name="TemplateDock" type="Control" node_paths=PackedStringArray("top", "bottom", "tab_container", "built_in_container", "add_on_container")]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gmawc")
+top = NodePath("VBoxContainer/Top")
+bottom = NodePath("VBoxContainer/Bottom")
+tab_container = NodePath("VBoxContainer/Bottom/TabContainer")
+built_in_container = NodePath("VBoxContainer/Bottom/TabContainer/Built-In/Container")
+add_on_container = NodePath("VBoxContainer/Bottom/TabContainer/Add-On/Container")
 metadata/_edit_use_anchors_ = true
 
-[node name="Bottom" type="ColorRect" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.0540123
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.129412, 0.14902, 0.180392, 1)
+theme_override_constants/separation = 0
 
-[node name="Top" type="ColorRect" parent="."]
+[node name="Top" type="ColorRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.0540123
-grow_horizontal = 2
-color = Color(0.211765, 0.239216, 0.290196, 1)
+layout_mode = 2
+color = Color(0.0941176, 0.215686, 0.219608, 1)
 
-[node name="Buttons" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Top"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.0540123
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = -5
 
-[node name="Spacing" type="Panel" parent="Buttons"]
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Top/MarginContainer"]
+layout_mode = 2
+
+[node name="Spacing" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
 metadata/_edit_use_anchors_ = true
 
-[node name="AddButton" type="TextureButton" parent="Buttons"]
+[node name="AddButton" type="TextureButton" parent="VBoxContainer/Top/MarginContainer/Buttons"]
 custom_minimum_size = Vector2(20, 35)
 layout_mode = 2
 tooltip_text = "Add Scene To Template Dock"
-texture_normal = ExtResource("1_a0u6q")
-texture_pressed = ExtResource("2_v0gqr")
-texture_hover = ExtResource("3_wygq0")
+texture_normal = ExtResource("2_gjpq1")
+texture_pressed = ExtResource("3_a8oc2")
+texture_hover = ExtResource("4_myae2")
 ignore_texture_size = true
 stretch_mode = 5
-script = ExtResource("4_wurdq")
+script = ExtResource("4_0x3ol")
 metadata/_edit_use_anchors_ = true
 
-[node name="Spacing2" type="Panel" parent="Buttons"]
+[node name="Spacing2" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
 metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="TextureButton" parent="Buttons"]
+[node name="Settings" type="TextureButton" parent="VBoxContainer/Top/MarginContainer/Buttons"]
 custom_minimum_size = Vector2(22.76, 35)
 layout_mode = 2
 tooltip_text = "Add Scene To Template Dock"
-texture_normal = ExtResource("5_dtsgy")
-texture_pressed = ExtResource("6_5pmyy")
-texture_hover = ExtResource("7_svx7x")
+texture_normal = ExtResource("6_huyll")
+texture_pressed = ExtResource("7_4gyts")
+texture_hover = ExtResource("8_dxqh0")
 ignore_texture_size = true
 stretch_mode = 5
-script = ExtResource("6_2py3s")
+script = ExtResource("8_orovv")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_top = 35.0
-offset_right = 1152.0
-offset_bottom = 648.0
-
-[node name="Spacing" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(5, 0)
+[node name="Bottom" type="ColorRect" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
-metadata/_edit_use_anchors_ = true
+size_flags_vertical = 3
+color = Color(0.0705882, 0.161765, 0.164706, 1)
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_3egsg")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_5t8sy")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jhmnb")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3mlxt")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_qoqkb")
+
+[node name="Built-In" type="Control" parent="VBoxContainer/Bottom/TabContainer"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="VBoxContainer/Bottom/TabContainer/Built-In"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-bbcode_enabled = true
-text = "[b][u]Built-In[/u][/b]"
-fit_content = true
-
-[node name="3DPlayerController" parent="VBoxContainer" instance=ExtResource("5_1etg0")]
+[node name="3DPlayerController" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container" instance=ExtResource("5_1etg0")]
 layout_mode = 2
 
-[node name="Margin" parent="VBoxContainer/3DPlayerController" index="0"]
+[node name="Margin" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/3DPlayerController" index="0"]
 tooltip_text = "3DPlayerController
 Type: Scene
 Path: res://TemplateSaver/Scenes/Templates/3DPlayerController.dat"
-script = ExtResource("6_xyktx")
 
-[node name="Label" parent="VBoxContainer/3DPlayerController/Margin/Info" index="1"]
+[node name="Icon" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/3DPlayerController/Margin/Info" index="0"]
+modulate = Color(0.424807, 0.748603, 0.900824, 1)
+
+[node name="Label" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/3DPlayerController/Margin/Info" index="1"]
 text = "3DPlayerController"
+vertical_alignment = 1
 
-[node name="2DPlayerController" parent="VBoxContainer" instance=ExtResource("5_1etg0")]
+[node name="2DPlayerController" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container" instance=ExtResource("5_1etg0")]
 layout_mode = 2
 
-[node name="Margin" parent="VBoxContainer/2DPlayerController" index="0"]
+[node name="Margin" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/2DPlayerController" index="0"]
 tooltip_text = "2DPlayerController
 Type: Scene
 Path: res://TemplateSaver/Scenes/Templates/2DPlayerController.dat"
-script = ExtResource("6_xyktx")
 
-[node name="Label" parent="VBoxContainer/2DPlayerController/Margin/Info" index="1"]
+[node name="Icon" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/2DPlayerController/Margin/Info" index="0"]
+modulate = Color(0.424807, 0.748603, 0.900824, 1)
+
+[node name="Label" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/2DPlayerController/Margin/Info" index="1"]
 text = "2DPlayerController"
+vertical_alignment = 1
 
-[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+[node name="Add-On" type="Control" parent="VBoxContainer/Bottom/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="VBoxContainer/Bottom/TabContainer/Add-On"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Bottom/TabContainer/Add-On/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-bbcode_enabled = true
-text = "[b][u]Add-On[/u][/b]"
-fit_content = true
+[connection signal="pressed" from="VBoxContainer/Top/MarginContainer/Buttons/AddButton" to="VBoxContainer/Top/MarginContainer/Buttons/AddButton" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/Top/MarginContainer/Buttons/Settings" to="VBoxContainer/Top/MarginContainer/Buttons/Settings" method="OnPressed"]
 
-[connection signal="pressed" from="Buttons/AddButton" to="Buttons/AddButton" method="OnPressed"]
-[connection signal="pressed" from="Buttons/Settings" to="Buttons/Settings" method="OnPressed"]
-
-[editable path="VBoxContainer/3DPlayerController"]
-[editable path="VBoxContainer/2DPlayerController"]
+[editable path="VBoxContainer/Bottom/TabContainer/Built-In/Container/3DPlayerController"]
+[editable path="VBoxContainer/Bottom/TabContainer/Built-In/Container/2DPlayerController"]

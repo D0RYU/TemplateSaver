@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://up5fjhugff6t"
-path="res://.godot/imported/plus.png-4061963eda9cf4736bd305b72162025f.ctex"
+uid="uid://bcwkjcjlah0wl"
+path="res://.godot/imported/open gray.png-e894701e1f0d77ec0160b4cdc680f980.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TemplateSaver/Images/plus.png"
-dest_files=["res://.godot/imported/plus.png-4061963eda9cf4736bd305b72162025f.ctex"]
+source_file="res://addons/TemplateSaver/Images/OpenFolderIcon/open gray.png"
+dest_files=["res://.godot/imported/open gray.png-e894701e1f0d77ec0160b4cdc680f980.ctex"]
 
 [params]
 

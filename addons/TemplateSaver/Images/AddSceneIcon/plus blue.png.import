@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djfo3yavg6eva"
-path="res://.godot/imported/close_icon_blue.png-da55fa8fe0f97e8a2487e4dc90fcded9.ctex"
+uid="uid://bfxgf7ub3w8dd"
+path="res://.godot/imported/plus blue.png-c81f9d5c7322f8997f1f960181bad0a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TemplateSaver/Images/close_icon_blue.png"
-dest_files=["res://.godot/imported/close_icon_blue.png-da55fa8fe0f97e8a2487e4dc90fcded9.ctex"]
+source_file="res://addons/TemplateSaver/Images/AddSceneIcon/plus blue.png"
+dest_files=["res://.godot/imported/plus blue.png-c81f9d5c7322f8997f1f960181bad0a5.ctex"]
 
 [params]
 

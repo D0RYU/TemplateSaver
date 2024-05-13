@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqal3va04s6m5"
-path="res://.godot/imported/plus gray.png-8c668611094690a95879f9f270cc4025.ctex"
+uid="uid://dl0b0cfabm0oi"
+path="res://.godot/imported/reset gray.png-48539adbeb50c5ce4d7aee2befa1ca6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TemplateSaver/Images/plus gray.png"
-dest_files=["res://.godot/imported/plus gray.png-8c668611094690a95879f9f270cc4025.ctex"]
+source_file="res://addons/TemplateSaver/Images/ResetPathIcon/reset gray.png"
+dest_files=["res://.godot/imported/reset gray.png-48539adbeb50c5ce4d7aee2befa1ca6a.ctex"]
 
 [params]
 
