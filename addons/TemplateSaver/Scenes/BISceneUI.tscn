@@ -30,6 +30,7 @@ layout_mode = 2
 mouse_filter = 1
 text = "Scene 1
 "
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="Margin" to="Margin" method="MouseEntered"]
 [connection signal="mouse_exited" from="Margin" to="Margin" method="MouseExited"]

@@ -45,5 +45,6 @@ func SetColor() -> void:
 		if add_on is HBoxContainer:
 			ChangeSceneColor(add_on)
 
-func ChangeSceneColor(scene: HBoxContainer) -> void:
-	scene.get_node("Margin/Info/Icon").modulate = accent_color
+func ChangeSceneColor(scene) -> void:
+	if scene is HBoxContainer:
+		scene.get_node("Margin/Info/Icon").modulate = accent_color

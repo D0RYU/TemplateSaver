@@ -27,6 +27,7 @@ layout_mode = 2
 mouse_filter = 1
 text = "Scene 1
 "
+vertical_alignment = 1
 
 [node name="Remove" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(21.075, 0)

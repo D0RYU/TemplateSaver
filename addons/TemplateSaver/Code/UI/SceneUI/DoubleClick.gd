@@ -29,8 +29,11 @@ func _input(event: InputEvent) -> void:
 
 func FileSelected(path: String) -> void:
 	if path.get_extension() == "tscn":
-		var scene: PackedScene = template_data.data[scene_label.text].scene
-		
-		ResourceSaver.save(scene, path)
+		if template_data.MakeDirectory(path.left(-5)):
+			var template: Array = template_data.data[scene_label.text].scene
+			
+			for dependency in template:
+				print(dependency[1], path.left(-5) + "/" + dependency[0] + ".tscn")
+				ResourceSaver.save(dependency[1], path.left(-5) + "/" + dependency[0] + ".tscn")
 	else:
 		dialog.NewAlert("invalid save, tscn expected")

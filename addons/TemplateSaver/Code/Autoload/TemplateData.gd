@@ -37,6 +37,37 @@ func RMDir(directory: String) -> bool:
 	
 	return false
 
+func RemoveTemplate(path: String) -> bool:
+	var directory: DirAccess = DirAccess.open(path)
+	var directories: Array = [path]
+	
+	if directory:
+		directory.list_dir_begin()
+		var file_name: String = directory.get_next()
+		
+		while file_name != "":
+			if directory.current_is_dir():
+				directories.append(path + "/" + file_name)
+				RemoveTemplate(path + "/" + file_name)
+			else:
+				var directory_code: int = DirAccess.remove_absolute(path + "/" + file_name)
+				
+				if directory_code != OK:
+					dialog.NewAlert("Error Deleting File: " + error_string(directory_code) + "\nPath: " + path + "/" + file_name)
+					return false
+			
+			file_name = directory.get_next()
+		
+		for directory_path in directories:
+			var directory_code: int = DirAccess.remove_absolute(directory_path)
+			
+			if directory_code != OK:
+				dialog.NewAlert("Error Deleting Directory: " + error_string(directory_code) + "\nPath: " + directory_path)
+				return false
+	
+	dialog.NewAlert("Remove Successful")
+	return true
+
 func MakeDirectory(directory: String) -> bool:
 	var directory_code: int = DirAccess.make_dir_absolute(directory)
 	
@@ -47,8 +78,8 @@ func MakeDirectory(directory: String) -> bool:
 	return true
 
 func MoveDirectory(source: String, destination: String) -> bool:
-	source = source.rstrip("/")
-	destination = destination.rstrip("/")
+	source = MakeValid(source)
+	destination = MakeValid(destination)
 	
 	var directory := DirAccess.open(destination)
 	var source_name: String = source.split("/", false)[-1]
@@ -92,19 +123,25 @@ func Move(to: String) -> bool:
 	file.close()
 	return moved
 
+func MakeValid(path: String) -> String:
+	return path.replace("//", "/").rstrip("/")
+
 func IsDefaultPath() -> bool:
 	var user_path: String = OS.get_data_dir() + "/Godot/TemplateSaver/Templates"
 	
-	return data_path.replace("//", "/").rstrip("/") == user_path.replace("//", "/").rstrip("/")
+	return MakeValid(data_path) == MakeValid(user_path)
 
-func Add(data_name: String, id: String, template: PackedScene, ui: HBoxContainer) -> bool:
+func Add(data_name: String, id: String, template: Array, ui: HBoxContainer) -> bool:
 	if data.has(data_name):
 		return false
 	
 	print("add: ", data_name)
+	for count in template.size():
+		template[count][1] = template[count][1].duplicate()
+	
 	data[data_name] = {
 		id = id,
-		scene = template.duplicate(),
+		scene = template,
 		ui = ui
 	}
 	
@@ -116,9 +153,11 @@ func Remove(data_name: String) -> bool:
 	
 	var directory: DirAccess = DirAccess.open(data_path)
 	
-	directory.remove(data_name + "_" + data[data_name].id + ".dat")
+	print("remove: ", data)
+	if !RemoveTemplate(data_path.replace("/", "\\") + data_name + "_" + data[data_name].id):
+		return false
+	
 	data[data_name].ui.queue_free()
 	data.erase(data_name)
-	print("remove: ", data)
 	
 	return true

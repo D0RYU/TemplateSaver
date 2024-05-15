@@ -160,7 +160,6 @@ modulate = Color(0.424807, 0.748603, 0.900824, 1)
 
 [node name="Label" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/3DPlayerController/Margin/Info" index="1"]
 text = "3DPlayerController"
-vertical_alignment = 1
 
 [node name="2DPlayerController" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container" instance=ExtResource("5_1etg0")]
 layout_mode = 2
@@ -175,7 +174,6 @@ modulate = Color(0.424807, 0.748603, 0.900824, 1)
 
 [node name="Label" parent="VBoxContainer/Bottom/TabContainer/Built-In/Container/2DPlayerController/Margin/Info" index="1"]
 text = "2DPlayerController"
-vertical_alignment = 1
 
 [node name="Add-On" type="Control" parent="VBoxContainer/Bottom/TabContainer"]
 visible = false

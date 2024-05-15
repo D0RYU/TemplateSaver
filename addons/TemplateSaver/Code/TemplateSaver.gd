@@ -51,15 +51,15 @@ func _enter_tree() -> void:
 
 func AddCurrentTemplates(dock: Control, path: String) -> void:
 	var directory: DirAccess = DirAccess.open(path)
-	var add_button: TextureButton = dock.get_node("VBoxContainer/Top/Buttons/AddButton")
+	var add_button: TextureButton = dock.get_node("VBoxContainer/Top/MarginContainer/Buttons/AddButton")
 	
 	if directory:
 		directory.list_dir_begin()
 		var file_name: String = directory.get_next()
 		
 		while file_name != "":
-			if !directory.current_is_dir():
-				add_button.FileSelected(path + file_name, false)
+			if directory.current_is_dir():
+				add_button.FileSelected([path + file_name], false)
 			
 			file_name = directory.get_next()
 
