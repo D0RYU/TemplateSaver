@@ -1,0 +1,351 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpdgk64a5gbkp"]
+
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/SettingsColor.gd" id="1_jrdyd"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DragUI.gd" id="9_yya82"]
+[ext_resource type="Texture2D" uid="uid://3msh86x0yl68" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_red.png" id="10_icauf"]
+[ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_blue.png" id="11_4l7q4"]
+[ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_gray.png" id="12_bbs6j"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/CloseSettings.gd" id="13_nqp5f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pufr3"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_edmbo"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("top", "bottom", "highlight", "shadow", "outline")]
+custom_minimum_size = Vector2(659, 462)
+layout_mode = 3
+anchor_left = 0.213976
+anchor_top = 0.143519
+anchor_right = 0.786024
+anchor_bottom = 0.856481
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jrdyd")
+top = NodePath("Top")
+bottom = NodePath("Bottom")
+highlight = NodePath("Highlight")
+shadow = NodePath("Shadow")
+outline = NodePath("Outline")
+metadata/_edit_use_anchors_ = true
+
+[node name="Highlight" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.999997
+anchor_bottom = 0.0757576
+grow_horizontal = 2
+color = Color(0.423529, 0.74902, 0.901961, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Outline" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0735931
+anchor_right = 0.999997
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0470588, 0.107843, 0.109804, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Bottom" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(326, 407)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0289017
+anchor_top = 0.0909091
+anchor_right = 0.971096
+anchor_bottom = 0.978355
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0705882, 0.161765, 0.164706, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Bottom/ScrollContainer"]
+layout_mode = 2
+
+[node name="Version 1_10" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_10"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_10"]
+layout_mode = 2
+text = "Version 1.10"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_10"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS:
+--new show prints option
+--you can now change the location of the plugin(dock/bottom)
+
+Fixes:
+--recursion with preload/load is now not possible
+--duplicates found in templates are removed
+
+UI:
+--multi select templates using ctrl+click/shift+click/cmd+click
+--multi dragging templates
+--ui bug fixes
+--renaming template
+--filtering templates
+--changelog
+--invalid character in name warning
+--name already exists warning
+
+Extra:
+--there could be other things I forgot
+--love and care from nici
+--updates will take a haitus after this one for a while :( sorry..."
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Version 1_08" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_08"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_08"]
+layout_mode = 2
+text = "Version 1.08"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_08"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "--now supports preload/load dependencies
+--fixed node paths
+--more fixed errors
+--multiple template addition"
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing2" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Version 1_04" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_04"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_04"]
+layout_mode = 2
+text = "Version 1.04"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_04"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "--all the ui for the plugin fits with the editor theme colors
+--a lot of bug fixes
+--you can now change the template data path in settings on windows.
+linux support will come soon
+--regardless of OS you can open the template data path in settings"
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing3" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Version 1_025" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_025"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_025"]
+layout_mode = 2
+text = "Version 1.025"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_025"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "--any script load issues are now FIXED
+--settings menu is now added and it shows you the data path/scene icon color
+(you can't change settings yet)"
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing4" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Version 1_022" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_022"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_022"]
+layout_mode = 2
+text = "Version 1.022"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_022"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "--added addons folder"
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing5" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Version 1_021" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_021"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_021"]
+layout_mode = 2
+text = "Version 1.021"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_021"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "--put everything in folder to hopefully fix the automatic install process"
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing6" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Version 1_02" type="HBoxContainer" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_02"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_02"]
+layout_mode = 2
+text = "Version 1.02"
+label_settings = SubResource("LabelSettings_pufr3")
+
+[node name="HSeparator2" type="HSeparator" parent="Bottom/ScrollContainer/VBoxContainer/Version 1_02"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="Bottom/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "--put on new github
+--fixed naming issue for scenes"
+label_settings = SubResource("LabelSettings_edmbo")
+
+[node name="Spacing7" type="ColorRect" parent="Bottom/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Shadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0289017
+anchor_top = 0.0735931
+anchor_right = 0.971096
+anchor_bottom = 0.0909091
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0564706, 0.129412, 0.131765, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Top" type="ColorRect" parent="." node_paths=PackedStringArray("parent", "moveables")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0115607
+anchor_top = 0.00865801
+anchor_right = 0.991327
+anchor_bottom = 0.0735931
+grow_horizontal = 2
+color = Color(0.0941176, 0.215686, 0.219608, 1)
+script = ExtResource("9_yya82")
+parent = NodePath("..")
+moveables = [NodePath("../Highlight"), NodePath("../Outline"), NodePath("../Shadow"), NodePath(".")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Top"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.1
+anchor_right = 1.0
+anchor_bottom = 0.966666
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 23
+text = "Changelog"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Close" type="TextureButton" parent="Top"]
+custom_minimum_size = Vector2(35, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.94631
+anchor_top = 0.0865594
+anchor_right = 1.00052
+anchor_bottom = 0.946774
+offset_top = 0.403218
+offset_bottom = -0.403219
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Add Scene To Template Dock"
+texture_normal = ExtResource("10_icauf")
+texture_pressed = ExtResource("11_4l7q4")
+texture_hover = ExtResource("12_bbs6j")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("13_nqp5f")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Top/Close" to="Top/Close" method="OnPressed"]

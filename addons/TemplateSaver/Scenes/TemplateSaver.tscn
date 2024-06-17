@@ -1,0 +1,276 @@
+[gd_scene load_steps=34 format=3 uid="uid://bhy6uil3ks75h"]
+
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/DockColor.gd" id="1_fphg1"]
+[ext_resource type="Texture2D" uid="uid://ctjmc0lvqchfa" path="res://addons/TemplateSaver/Images/AddSceneIcon/plus white.png" id="2_aldjy"]
+[ext_resource type="Texture2D" uid="uid://bfxgf7ub3w8dd" path="res://addons/TemplateSaver/Images/AddSceneIcon/plus blue.png" id="3_t7mnb"]
+[ext_resource type="Texture2D" uid="uid://bqal3va04s6m5" path="res://addons/TemplateSaver/Images/AddSceneIcon/plus gray.png" id="4_p8pua"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/AddButton.gd" id="5_m2lvy"]
+[ext_resource type="Texture2D" uid="uid://lhel21v2ygf2" path="res://addons/TemplateSaver/Images/SettingsIcon/settings_cog_icon_178923.png" id="6_cqv3e"]
+[ext_resource type="Texture2D" uid="uid://013bdefyu5u5" path="res://addons/TemplateSaver/Images/SettingsIcon/settings_cog_blue.png" id="7_rj531"]
+[ext_resource type="Texture2D" uid="uid://cfjiilbwrgkru" path="res://addons/TemplateSaver/Images/SettingsIcon/settings_cog_gray.png" id="8_sp0hp"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/OpenSettings.gd" id="9_t6x3r"]
+[ext_resource type="Texture2D" uid="uid://dhuuvborbu65e" path="res://addons/TemplateSaver/Images/Nothing.svg" id="10_6jpqx"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/FilterTemplates.gd" id="11_wombf"]
+[ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_gray.png" id="12_220f6"]
+[ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_blue.png" id="13_762w0"]
+[ext_resource type="Texture2D" uid="uid://dkfkddwcy25v8" path="res://addons/TemplateSaver/Images/SearchIcon/Search.svg" id="14_ffcsa"]
+[ext_resource type="Texture2D" uid="uid://b4xw4rjyvlbss" path="res://addons/TemplateSaver/Images/ChangelogICon/changelog_icon_white.png" id="15_4ofsg"]
+[ext_resource type="Texture2D" uid="uid://b5nyym0jmp81b" path="res://addons/TemplateSaver/Images/ChangelogICon/changelog_icon_blue.png" id="16_o0ify"]
+[ext_resource type="Texture2D" uid="uid://cfuwi32ftmv34" path="res://addons/TemplateSaver/Images/ChangelogICon/changelog_icon_gray.png" id="17_ypcol"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/ChangelogMenu/OpenChangelog.gd" id="18_tqlbp"]
+[ext_resource type="PackedScene" uid="uid://72fhx3u2t68e" path="res://addons/TemplateSaver/Scenes/BISceneUI.tscn" id="19_4fp30"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/TemplateDock/Selections.gd" id="20_vtjyi"]
+[ext_resource type="PackedScene" uid="uid://catc8um5fbv0l" path="res://addons/TemplateSaver/Scenes/SceneMiddle.tscn" id="21_4mtlu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a5vw"]
+bg_color = Color(0.0941176, 0.215686, 0.219608, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2v75s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b6w0j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pu3f"]
+bg_color = Color(0.0658823, 0.15098, 0.153726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3egsg"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.0941176, 0.215686, 0.219608, 1)
+border_width_top = 2
+border_color = Color(0.423529, 0.74902, 0.901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t8sy"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.117647, 0.269607, 0.27451, 1)
+border_width_top = 2
+border_color = Color(0.423529, 0.74902, 0.901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhmnb"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.0564706, 0.129412, 0.131765, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3mlxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qoqkb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m01d5"]
+resource_local_to_scene = true
+bg_color = Color(0.254117, 0.449412, 0.541177, 0.3)
+draw_center = false
+border_color = Color(0.423529, 0.74902, 0.901961, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjw3e"]
+resource_local_to_scene = true
+bg_color = Color(0.254117, 0.449412, 0.541177, 0.3)
+draw_center = false
+border_color = Color(0.423529, 0.74902, 0.901961, 0)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2ywhh"]
+resource_local_to_scene = true
+color = Color(0.424807, 0.748603, 0.900824, 0)
+
+[node name="TemplateSaver" type="BoxContainer" node_paths=PackedStringArray("top", "bottom", "tab_container", "built_in_container", "add_on_container")]
+custom_minimum_size = Vector2(200, 150)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fphg1")
+top = NodePath("VBoxContainer/Top")
+bottom = NodePath("VBoxContainer/Bottom")
+tab_container = NodePath("VBoxContainer/Bottom/ScrollContainer/TabContainer")
+built_in_container = NodePath("VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In")
+add_on_container = NodePath("VBoxContainer/Bottom/ScrollContainer/TabContainer/Add-On")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Top" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0a5vw")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Top"]
+layout_mode = 2
+theme_override_constants/margin_top = -5
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Top/MarginContainer"]
+layout_mode = 2
+
+[node name="Spacing" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
+metadata/_edit_use_anchors_ = true
+
+[node name="AddButton" type="TextureButton" parent="VBoxContainer/Top/MarginContainer/Buttons" node_paths=PackedStringArray("scene_container")]
+custom_minimum_size = Vector2(17, 35)
+layout_mode = 2
+tooltip_text = "Add scene to template dock"
+texture_normal = ExtResource("2_aldjy")
+texture_pressed = ExtResource("3_t7mnb")
+texture_hover = ExtResource("4_p8pua")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("5_m2lvy")
+scene_container = NodePath("../../../../Bottom/ScrollContainer/TabContainer/Add-On")
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacing2" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Settings" type="TextureButton" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(19.34, 35)
+layout_mode = 2
+tooltip_text = "Open settings"
+texture_normal = ExtResource("6_cqv3e")
+texture_pressed = ExtResource("7_rj531")
+texture_hover = ExtResource("8_sp0hp")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("9_t6x3r")
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacing3" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = -21
+theme_override_constants/margin_bottom = 3
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Top/MarginContainer/Buttons/MarginContainer" node_paths=PackedStringArray("add_container", "search")]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Filter templates by name. Filtering is case-insensitive"
+placeholder_text = "Filter: name"
+right_icon = ExtResource("10_6jpqx")
+script = ExtResource("11_wombf")
+add_container = NodePath("../../../../../Bottom/ScrollContainer/TabContainer/Add-On")
+search = NodePath("../../MarginContainer2/Search")
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(17, 35)
+layout_mode = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_right = 5
+
+[node name="Search" type="TextureButton" parent="VBoxContainer/Top/MarginContainer/Buttons/MarginContainer2"]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("12_220f6")
+texture_pressed = ExtResource("13_762w0")
+texture_hover = ExtResource("12_220f6")
+texture_disabled = ExtResource("14_ffcsa")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Spacing4" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(-1.29, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2v75s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Changelog" type="TextureButton" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(21.985, 35)
+layout_mode = 2
+tooltip_text = "Open changelog"
+texture_normal = ExtResource("15_4ofsg")
+texture_pressed = ExtResource("16_o0ify")
+texture_hover = ExtResource("17_ypcol")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("18_tqlbp")
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacing5" type="Panel" parent="VBoxContainer/Top/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b6w0j")
+metadata/_edit_use_anchors_ = true
+
+[node name="Bottom" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_6pu3f")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/Bottom/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_3egsg")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_5t8sy")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jhmnb")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3mlxt")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_qoqkb")
+
+[node name="Built-In" type="VBoxContainer" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer"]
+layout_mode = 2
+
+[node name="Top" type="HSeparator" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In"]
+layout_mode = 2
+
+[node name="3DPlayerController" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In" instance=ExtResource("19_4fp30")]
+layout_mode = 2
+tooltip_text = "3DPlayerController
+Type: Scene
+Path: res://TemplateSaver/Scenes/Templates/3DPlayerController.dat"
+
+[node name="Panel" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In/3DPlayerController" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_m01d5")
+
+[node name="Label" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In/3DPlayerController/Panel/Info" index="1"]
+text = "3DPlayerController"
+
+[node name="2DPlayerController" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In" instance=ExtResource("19_4fp30")]
+layout_mode = 2
+tooltip_text = "2DPlayerController
+Type: Scene
+Path: res://TemplateSaver/Scenes/Templates/2DPlayerController.dat"
+
+[node name="Panel" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In/2DPlayerController" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_pjw3e")
+
+[node name="Label" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In/2DPlayerController/Panel/Info" index="1"]
+text = "2DPlayerController"
+
+[node name="Add-On" type="VBoxContainer" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer" node_paths=PackedStringArray("add_button", "bottom", "settings")]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("20_vtjyi")
+add_button = NodePath("../../../../Top/MarginContainer/Buttons/AddButton")
+bottom = NodePath("../../..")
+settings = NodePath("../../../../Top/MarginContainer/Buttons/Settings")
+
+[node name="Top" type="HSeparator" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Add-On"]
+layout_mode = 2
+
+[node name="SceneMiddle" parent="VBoxContainer/Bottom/ScrollContainer/TabContainer/Add-On" instance=ExtResource("21_4mtlu")]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_2ywhh")
+
+[connection signal="pressed" from="VBoxContainer/Top/MarginContainer/Buttons/AddButton" to="VBoxContainer/Top/MarginContainer/Buttons/AddButton" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/Top/MarginContainer/Buttons/Settings" to="VBoxContainer/Top/MarginContainer/Buttons/Settings" method="OnPressed"]
+[connection signal="text_changed" from="VBoxContainer/Top/MarginContainer/Buttons/MarginContainer/LineEdit" to="VBoxContainer/Top/MarginContainer/Buttons/MarginContainer/LineEdit" method="TextChanged"]
+[connection signal="pressed" from="VBoxContainer/Top/MarginContainer/Buttons/MarginContainer2/Search" to="VBoxContainer/Top/MarginContainer/Buttons/MarginContainer/LineEdit" method="DeleteAll"]
+[connection signal="pressed" from="VBoxContainer/Top/MarginContainer/Buttons/Changelog" to="VBoxContainer/Top/MarginContainer/Buttons/Changelog" method="OnPressed"]
+
+[editable path="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In/3DPlayerController"]
+[editable path="VBoxContainer/Bottom/ScrollContainer/TabContainer/Built-In/2DPlayerController"]

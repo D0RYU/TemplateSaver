@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://catc8um5fbv0l"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lp48l"]
+resource_local_to_scene = true
+color = Color(0, 0, 0, 0)
+
+[node name="SceneMiddle" type="HSeparator"]
+offset_right = 40.0
+offset_bottom = 4.0
+theme_override_styles/separator = SubResource("StyleBoxLine_lp48l")

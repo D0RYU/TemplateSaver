@@ -1,12 +1,12 @@
 @tool
 extends TextureButton
 
-var file_manager_scene: PackedScene = preload("res://addons/TemplateSaver/Scenes/SettingsMenu.tscn")
-var scene_container: Control
+var settings_menu_scene: PackedScene = preload("res://addons/TemplateSaver/Scenes/SettingsMenu.tscn")
+var settings_menu: Control
 
 func OnPressed() -> void:
-	if !scene_container:
-		scene_container = file_manager_scene.instantiate()
-		EditorInterface.get_base_control().add_child.call_deferred(scene_container)
+	if !settings_menu:
+		settings_menu = settings_menu_scene.instantiate()
+		EditorInterface.get_base_control().add_child.call_deferred(settings_menu)
 	else:
-		scene_container.queue_free()
+		settings_menu.queue_free()

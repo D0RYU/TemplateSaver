@@ -1,0 +1,158 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckcreliu608wd"]
+
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SetName/SetNameColor.gd" id="1_oh6r8"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DragUI.gd" id="2_av478"]
+[ext_resource type="Texture2D" uid="uid://3msh86x0yl68" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_red.png" id="3_5ux77"]
+[ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_blue.png" id="4_vnpc5"]
+[ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_gray.png" id="5_t6p80"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/CloseSettings.gd" id="6_gx8a1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rlb7g"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or8hj"]
+content_margin_left = 5.0
+bg_color = Color(0.0564706, 0.129412, 0.131765, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ax8g"]
+bg_color = Color(0.0752941, 0.172549, 0.175686, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="SetName" type="Control" node_paths=PackedStringArray("title", "outline", "fill", "split", "name_edit", "enter")]
+layout_mode = 3
+anchor_left = 0.19184
+anchor_top = 0.41821
+anchor_right = 0.80816
+anchor_bottom = 0.58179
+offset_bottom = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oh6r8")
+title = NodePath("MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/HBoxContainer/Label")
+outline = NodePath("MarginContainer/Outline")
+fill = NodePath("MarginContainer/Outline/MarginContainer/Fill")
+split = NodePath("MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer/Split")
+name_edit = NodePath("MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit")
+enter = NodePath("MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/Enter")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." node_paths=PackedStringArray("parent", "moveables")]
+custom_minimum_size = Vector2(178, 106)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_av478")
+parent = NodePath(".")
+moveables = [NodePath("Outline"), NodePath("Outline/MarginContainer/Fill"), NodePath("Outline/MarginContainer/Fill/VBoxContainer/MarginContainer/Split")]
+
+[node name="Outline" type="ColorRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 105.66)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.0941176, 0.215686, 0.219608, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Outline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Fill" type="ColorRect" parent="MarginContainer/Outline/MarginContainer"]
+layout_mode = 2
+color = Color(0.0705882, 0.161765, 0.164706, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Outline/MarginContainer/Fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Choose Name"
+label_settings = SubResource("LabelSettings_rlb7g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="TextureButton" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(35, 25)
+layout_mode = 2
+tooltip_text = "Add Scene To Template Dock"
+texture_normal = ExtResource("3_5ux77")
+texture_pressed = ExtResource("4_vnpc5")
+texture_hover = ExtResource("5_t6p80")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("6_gx8a1")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_bottom = 5
+
+[node name="Split" type="ColorRect" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 2.95)
+layout_mode = 2
+color = Color(0.0564706, 0.129412, 0.131765, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_or8hj")
+text = "bruh"
+placeholder_text = "choose name for template"
+deselect_on_focus_loss_enabled = false
+
+[node name="Enter" type="Button" parent="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(32.845, 45)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_or8hj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8ax8g")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_or8hj")
+text = ">"
+
+[connection signal="pressed" from="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/HBoxContainer/Close" to="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/HBoxContainer/Close" method="OnPressed"]
+[connection signal="focus_exited" from="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit" to="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit" method="grab_focus"]
+[connection signal="mouse_entered" from="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit" to="." method="MouseEntered"]
+[connection signal="mouse_exited" from="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit" to="." method="MouseExited"]
+[connection signal="ready" from="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit" to="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/NameEdit" method="grab_focus"]
+[connection signal="pressed" from="MarginContainer/Outline/MarginContainer/Fill/VBoxContainer/MarginContainer2/HBoxContainer/Enter" to="." method="NameEntered"]

@@ -1,15 +1,23 @@
 @tool
 extends VBoxContainer
 
-@onready var open_path: Button = $PathContainer/Path
-@onready var reset_path: TextureButton = $PathContainer/Reset
+@export var open_path: Button
+@export var reset_path: TextureButton
+@export var option_button: OptionButton
+@export var check_button: CheckButton
 
 var file_manager_scene: PackedScene = preload("res://addons/TemplateSaver/Scenes/FileManager.tscn")
 var template_data: Object:
 	get:
+		while !get_tree().root.has_node("TemplateData"):
+			await get_tree().create_timer(0).timeout
+		
 		return get_tree().root.get_node("TemplateData")
 
 func _ready() -> void:
+	option_button.selected = template_data.plugin_location
+	check_button.button_pressed = template_data.show_prints
+	option_button.item_selected.connect(template_data.plugin.LocationSelected)
 	reset_path.visible = !template_data.IsDefaultPath()
 	
 	if OS.get_name() != "Windows":
@@ -41,3 +49,11 @@ func DataPathOpened() -> void:
 
 func ResetDataPath() -> void:
 	DirectorySelected(OS.get_data_dir() + "/Godot/TemplateSaver/")
+
+func ShowPrint(enabled: bool) -> void:
+	var user_path: String = OS.get_data_dir() + "/Godot/TemplateSaver/"
+	var file := FileAccess.open(user_path + "ShowPrints.dat", FileAccess.WRITE)
+	
+	template_data.show_prints = enabled
+	file.store_string(str(enabled))
+	file.close()

@@ -1,11 +1,12 @@
 @tool
 extends Node
 
-var data_path = ""
+var dock: BoxContainer
+var plugin: EditorPlugin
+var data_path: String = ""
+var plugin_location: int = -1
+var show_prints: bool = false
 var data: Dictionary = {}
-var dialog: Object:
-	get:
-		return get_tree().root.get_node("Dialog")
 
 func Robocopy(source: String, destination: String) -> bool:
 	if MakeDirectory(destination):
@@ -14,14 +15,14 @@ func Robocopy(source: String, destination: String) -> bool:
 		
 		match move_code:
 			0, 1, 2, 3, 4, 5, 6, 7:
-				dialog.NewAlert("Move Successful:\n" + output[0].strip_edges())
+				Dialog.NewAlert("Move Successful:\n" + output[0].strip_edges())
 				return true
 			8:
-				dialog.NewAlert("Error: Some files or directories could not be copied\n" + output[0].strip_edges())
+				Dialog.NewAlert("Error: Some files or directories could not be copied\n" + output[0].strip_edges())
 			16:
-				dialog.NewAlert("Error: could not copy any files\n" + output[0].strip_edges())
+				Dialog.NewAlert("Error: could not copy any files\n" + output[0].strip_edges())
 			_:
-				dialog.NewAlert("Error: Invalid Command\n\"%s\"" % ("move " + source + " " + destination) + "\n" + output[0].strip_edges())
+				Dialog.NewAlert("Error: Invalid Command\n\"%s\"" % ("move " + source + " " + destination) + "\n" + output[0].strip_edges())
 	
 	return false
 
@@ -30,10 +31,10 @@ func RMDir(directory: String) -> bool:
 	var move_code: int = OS.execute("CMD.exe", ["/C", "rmdir", directory, "/s", "/q"], output)
 	
 	if move_code == 0:
-		dialog.NewAlert("Remove Successful:\n" + output[0].strip_edges())
+		Dialog.NewAlert("Remove Successful:\n" + output[0].strip_edges())
 		return true
 	else:
-		dialog.NewAlert("Remove Failed:\n" + output[0].strip_edges())
+		Dialog.NewAlert("Remove Failed:\n" + output[0].strip_edges())
 	
 	return false
 
@@ -53,7 +54,7 @@ func RemoveTemplate(path: String) -> bool:
 				var directory_code: int = DirAccess.remove_absolute(path + "/" + file_name)
 				
 				if directory_code != OK:
-					dialog.NewAlert("Error Deleting File: " + error_string(directory_code) + "\nPath: " + path + "/" + file_name)
+					Dialog.NewAlert("Error Deleting File: " + error_string(directory_code) + "\nPath: " + path + "/" + file_name)
 					return false
 			
 			file_name = directory.get_next()
@@ -62,17 +63,16 @@ func RemoveTemplate(path: String) -> bool:
 			var directory_code: int = DirAccess.remove_absolute(directory_path)
 			
 			if directory_code != OK:
-				dialog.NewAlert("Error Deleting Directory: " + error_string(directory_code) + "\nPath: " + directory_path)
+				Dialog.NewAlert("Error Deleting Directory: " + error_string(directory_code) + "\nPath: " + directory_path)
 				return false
 	
-	dialog.NewAlert("Remove Successful")
 	return true
 
 func MakeDirectory(directory: String) -> bool:
 	var directory_code: int = DirAccess.make_dir_absolute(directory)
 	
 	if directory_code != OK:
-		dialog.NewAlert("Error: " + error_string(directory_code))
+		Dialog.NewAlert("Error: " + error_string(directory_code))
 		return false
 	
 	return true
@@ -87,18 +87,18 @@ func MoveDirectory(source: String, destination: String) -> bool:
 	var path2 = ProjectSettings.globalize_path(destination + "/" + source_name).replace("/", "\\")
 	
 	if !directory:
-		dialog.NewAlert("Error: Invalid Source/Destination path")
+		Dialog.NewAlert("Error: Invalid Source/Destination path")
 	elif directory.dir_exists(source_name):
-		var confirmation: ConfirmationDialog = dialog.NewConfirm("Are you sure you want to overwrite \"%s\"?" % (destination + "/" + source_name))
+		var confirmation: ConfirmationDialog = Dialog.NewConfirm("Are you sure you want to overwrite \"%s\"?" % (destination + "/" + source_name))
 		var ready = [null]
 		
-		confirmation.confirmed.connect(func():
+		confirmation.confirmed.connect(func() -> void:
 			if !RMDir(path2) or !Robocopy(path1, path2):
 				ready[0] = false
 			else:
 				ready[0] = true
 		)
-		confirmation.canceled.connect(func():
+		confirmation.canceled.connect(func() -> void:
 			ready[0] = false
 		)
 		
@@ -131,15 +131,65 @@ func IsDefaultPath() -> bool:
 	
 	return MakeValid(data_path) == MakeValid(user_path)
 
-func Add(data_name: String, id: String, template: Array, ui: HBoxContainer) -> bool:
+func GetOrder() -> Array:
+	return dock.add_on_container.get_children().filter(func(child: Control) -> bool: return child is MarginContainer)
+
+func ReOrder() -> bool:
+	var order: Array = GetOrder()
+	
+	for index: int in order.size():
+		var data_name: String = order[index].scene_label.text
+		
+		if !data.has(data_name):
+			return false
+		
+		var old_path: String = data[data_name].index + "@" + data_name + "@" + data[data_name].id
+		var new_path: String = str(index) + "@" + data_name + "@" + data[data_name].id
+		
+		DirAccess.open(data_path).rename(old_path, new_path)
+		data[data_name].index = str(index)
+	
+	return true
+
+func Rename(old_name: String, new_name: String) -> bool:
+	new_name = new_name.strip_edges()
+	
+	if "." in new_name or ":" in new_name or "@" in new_name or "/" in new_name or '"' in new_name or "%" in new_name:
+		Dialog.NewAlert("Invalid template name, the following character are not allowed:\n. : @ / \" %")
+		return true
+	
+	if old_name == new_name:
+		return true
+	
+	if data.has(new_name) or new_name == "":
+		return false
+	
+	if show_prints:
+		print("renamed: \"", old_name, "\" to \"", new_name, "\"")
+	
+	data[new_name] = data[old_name]
+	data[new_name].ui.scene_label.text = new_name
+	data.erase(old_name)
+	
+	var old_path: String = data[new_name].index + "@" + old_name + "@" + data[new_name].id
+	var new_path: String = data[new_name].index + "@" + new_name + "@" + data[new_name].id
+	
+	DirAccess.open(data_path).rename(old_path, new_path)
+	
+	return true
+
+func Add(data_name: String, index: String, id: String, template: Array, ui: MarginContainer) -> bool:
 	if data.has(data_name):
 		return false
 	
-	print("add: ", data_name)
+	if show_prints:
+		print("add: ", data_name)
+	
 	for count in template.size():
 		template[count][1] = template[count][1].duplicate()
 	
 	data[data_name] = {
+		index = index,
 		id = id,
 		scene = template,
 		ui = ui
@@ -147,17 +197,27 @@ func Add(data_name: String, id: String, template: Array, ui: HBoxContainer) -> b
 	
 	return true
 
-func Remove(data_name: String) -> bool:
-	if !data.has(data_name):
-		return false
+func Remove(data_names: Array) -> bool:
+	for data_name in data_names:
+		if !data.has(data_name):
+			return false
+		
+		var directory: DirAccess = DirAccess.open(data_path)
+		var ui: MarginContainer = data[data_name].ui
+		
+		if show_prints:
+			print("remove: ", data_name)
+		
+		if !RemoveTemplate(data_path.replace("/", "\\") + data[data_name].index + "@" + data_name + "@" + data[data_name].id):
+			return false
+		
+		ui.queue_free()
+		data.erase(data_name)
+		
+		while is_instance_valid(ui):
+			await get_tree().create_timer(0).timeout
+		
+		ReOrder()
 	
-	var directory: DirAccess = DirAccess.open(data_path)
-	
-	print("remove: ", data)
-	if !RemoveTemplate(data_path.replace("/", "\\") + data_name + "_" + data[data_name].id):
-		return false
-	
-	data[data_name].ui.queue_free()
-	data.erase(data_name)
-	
+	Dialog.NewAlert("Remove Successful")
 	return true

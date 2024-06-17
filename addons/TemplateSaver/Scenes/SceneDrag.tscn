@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh6b27wd550so"]
+
+[ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="1_2pqn2"]
+
+[node name="SceneDrag" type="HBoxContainer"]
+
+[node name="Icon" type="TextureRect" parent="."]
+modulate = Color(0.424807, 0.748603, 0.900824, 1)
+layout_mode = 2
+texture = ExtResource("1_2pqn2")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Scene 1"
+vertical_alignment = 1

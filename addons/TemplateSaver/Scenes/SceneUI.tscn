@@ -1,42 +1,104 @@
-[gd_scene load_steps=5 format=3 uid="uid://vtxf12f6x00y"]
+[gd_scene load_steps=9 format=3 uid="uid://vtxf12f6x00y"]
 
 [ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SceneUI/DoubleClick.gd" id="1_rknon"]
 [ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="2_fo4yx"]
 [ext_resource type="Texture2D" uid="uid://cf0yrmhsicvjo" path="res://addons/TemplateSaver/Images/red-trash-can-icon.png" id="3_q5l51"]
 [ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SceneUI/RemoveScene.gd" id="4_m66ri"]
+[ext_resource type="PackedScene" uid="uid://catc8um5fbv0l" path="res://addons/TemplateSaver/Scenes/SceneMiddle.tscn" id="5_633te"]
 
-[node name="SceneUI" type="HBoxContainer"]
-mouse_filter = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y82l"]
+resource_local_to_scene = true
+bg_color = Color(0.160784, 0.301961, 0.34902, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
 
-[node name="Margin" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfcgi"]
+content_margin_left = 4.0
+bg_color = Color(0.0705882, 0.161765, 0.164706, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5h0cm"]
+resource_local_to_scene = true
+color = Color(0, 0, 0, 0)
+
+[node name="SceneUI" type="MarginContainer" node_paths=PackedStringArray("scene_label", "rename", "panel")]
+offset_right = 112.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_right = 7
 script = ExtResource("1_rknon")
+scene_label = NodePath("Container/Panel/Info/Label")
+rename = NodePath("Container/Panel/Info/Label/MarginContainer/Rename")
+panel = NodePath("Container/Panel")
 
-[node name="Info" type="HBoxContainer" parent="Margin"]
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="PanelContainer" parent="Container"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1y82l")
+
+[node name="Info" type="HBoxContainer" parent="Container/Panel"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Margin/Info"]
+[node name="Icon" type="TextureRect" parent="Container/Panel/Info"]
+modulate = Color(0.424807, 0.748603, 0.900824, 1)
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("2_fo4yx")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Margin/Info"]
+[node name="Label" type="Label" parent="Container/Panel/Info"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
-text = "Scene 1
-"
+text = "Scene 1"
 vertical_alignment = 1
+text_overrun_behavior = 1
 
-[node name="Remove" type="TextureButton" parent="."]
-custom_minimum_size = Vector2(21.075, 0)
+[node name="MarginContainer" type="MarginContainer" parent="Container/Panel/Info/Label"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="Rename" type="LineEdit" parent="Container/Panel/Info/Label/MarginContainer"]
+visible = false
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vfcgi")
+text = "Scene"
+placeholder_text = "Scene"
+
+[node name="Remove" type="TextureButton" parent="Container/Panel/Info" node_paths=PackedStringArray("scene_label")]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_vertical = 4
 texture_normal = ExtResource("3_q5l51")
 ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_m66ri")
+scene_label = NodePath("../Label")
 
-[connection signal="mouse_entered" from="Margin" to="Margin" method="MouseEntered"]
-[connection signal="mouse_exited" from="Margin" to="Margin" method="MouseExited"]
-[connection signal="pressed" from="Remove" to="Remove" method="OnPressed"]
+[node name="SceneMiddle" parent="Container" instance=ExtResource("5_633te")]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_5h0cm")
+
+[connection signal="mouse_entered" from="Container/Panel/Info/Label/MarginContainer/Rename" to="." method="MouseEnteredRename"]
+[connection signal="mouse_exited" from="Container/Panel/Info/Label/MarginContainer/Rename" to="." method="MouseExitedRename"]
+[connection signal="pressed" from="Container/Panel/Info/Remove" to="Container/Panel/Info/Remove" method="OnPressed"]

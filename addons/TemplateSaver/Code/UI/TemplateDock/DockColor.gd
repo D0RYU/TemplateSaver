@@ -1,50 +1,52 @@
 @tool
 extends Control
 
-@export var top: ColorRect
-@export var bottom: ColorRect
+@export var top: PanelContainer
+@export var bottom: PanelContainer
 @export var tab_container: TabContainer
 @export var built_in_container: VBoxContainer
 @export var add_on_container: VBoxContainer
 
 @onready var editor_settings: EditorSettings = EditorInterface.get_editor_settings()
 
-var base_color: Color
-var accent_color: Color
-
-func GetHint(color: Color, amount: float) -> Color:
-	return Color(color.r * amount, color.g * amount, color.b * amount, 1.0)
-
 func _ready() -> void:
 	editor_settings.settings_changed.connect(SetColor)
+	add_on_container.child_entered_tree.connect(ChangeAddOnColor)
 	SetColor()
 
 func SetColor() -> void:
-	base_color = editor_settings.get("interface/theme/base_color")
-	accent_color = editor_settings.get("interface/theme/accent_color")
-	
 	var tab_selected: StyleBoxFlat = tab_container.get("theme_override_styles/tab_selected")
 	var tab_hovered: StyleBoxFlat = tab_container.get("theme_override_styles/tab_hovered")
 	var tab_unselected: StyleBoxFlat = tab_container.get("theme_override_styles/tab_unselected")
 	
-	top.color = base_color
-	bottom.color = GetHint(base_color, 0.75)
-	tab_selected.bg_color = base_color
-	tab_selected.border_color = accent_color
-	tab_hovered.bg_color = GetHint(base_color, 1.25)
-	tab_hovered.border_color = accent_color
-	tab_unselected.bg_color = GetHint(base_color,  0.6)
-	
-	add_on_container.child_entered_tree.connect(ChangeSceneColor)
+	top.get("theme_override_styles/panel").bg_color = EditorColor.base_color
+	bottom.get("theme_override_styles/panel").bg_color = EditorColor.GetHint(EditorColor.base_color, 0.7)
+	tab_selected.bg_color = EditorColor.base_color
+	tab_selected.border_color = EditorColor.accent_color
+	tab_hovered.bg_color = EditorColor.GetHint(EditorColor.base_color, 1.25)
+	tab_hovered.border_color = EditorColor.accent_color
+	tab_unselected.bg_color = EditorColor.GetHint(EditorColor.base_color,  0.6)
 	
 	for built_in in built_in_container.get_children():
-		if built_in is HBoxContainer:
-			ChangeSceneColor(built_in)
+		ChangeBuiltInColor(built_in)
 	
 	for add_on in add_on_container.get_children():
-		if add_on is HBoxContainer:
-			ChangeSceneColor(add_on)
+		ChangeAddOnColor(add_on)
 
-func ChangeSceneColor(scene) -> void:
-	if scene is HBoxContainer:
-		scene.get_node("Margin/Info/Icon").modulate = accent_color
+func ChangeBuiltInColor(scene) -> void:
+	if scene is MarginContainer:
+		var panel_style: StyleBoxFlat = scene.get_node("Panel").get("theme_override_styles/panel")
+		
+		panel_style.bg_color = EditorColor.GetHint(EditorColor.accent_color, 0.6, 0.3)
+		panel_style.border_color = EditorColor.GetHint(EditorColor.accent_color, 1, 0)
+
+func ChangeAddOnColor(scene) -> void:
+	if scene is MarginContainer:
+		var container: VBoxContainer = scene.get_node("Container")
+		var panel_style: StyleBoxFlat = container.get_node("Panel").get("theme_override_styles/panel")
+		var rename: LineEdit = container.get_node("Panel/Info/Label/MarginContainer/Rename")
+		
+		panel_style.bg_color = EditorColor.GetHint(EditorColor.accent_color, 0.6, 0.3)
+		panel_style.border_color = EditorColor.GetHint(EditorColor.accent_color, 1, 0)
+		container.get_child(1).get("theme_override_styles/separator").color = EditorColor.GetHint(EditorColor.accent_color, 1, 0)
+		rename.get("theme_override_styles/normal").bg_color = EditorColor.GetHint(EditorColor.base_color, 0.75)

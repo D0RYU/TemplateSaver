@@ -1,39 +1,44 @@
 @tool
 extends MarginContainer
 
-@onready var scene_label: Label = get_node("Info/Label")
+@export var scene_label: Label
+@export var rename: LineEdit
+@export var panel: PanelContainer
+@export var remove: TextureButton
 
-var file_manager_scene: PackedScene = preload("res://addons/TemplateSaver/Scenes/FileManager.tscn")
-var mouse_over: bool = false
+@onready var panel_style: StyleBoxFlat = panel.get("theme_override_styles/panel")
+
+var add_button: TextureButton
+var mouse_over_rename: bool = false
 var template_data: Object:
 	get:
+		while !get_tree().root.has_node("TemplateData"):
+			await get_tree().create_timer(0).timeout
+		
 		return get_tree().root.get_node("TemplateData")
-var dialog: Object:
-	get:
-		return get_tree().root.get_node("Dialog")
 
-func MouseEntered() -> void:
-	mouse_over = true
+func _ready() -> void:
+	while !template_data.dock: await get_tree().create_timer(0).timeout
+	add_button = template_data.dock.get_node("VBoxContainer/Top/MarginContainer/Buttons/AddButton")
 
-func MouseExited() -> void:
-	mouse_over = false
+func MouseEnteredRename() -> void:
+	mouse_over_rename = true
+
+func MouseExitedRename() -> void:
+	mouse_over_rename = false
+
+func ResetCaret() -> void:
+	rename.set_caret_column(rename.text.length())
 
 func _input(event: InputEvent) -> void:
-	if mouse_over and event is InputEventMouseButton:
-		if event.double_click and event.button_index == MOUSE_BUTTON_LEFT:
-			var file_manager: FileDialog = file_manager_scene.instantiate()
-			file_manager.file_mode = FileDialog.FILE_MODE_SAVE_FILE
-			file_manager.file_selected.connect(FileSelected)
-			
-			EditorInterface.get_base_control().add_child.call_deferred(file_manager)
-
-func FileSelected(path: String) -> void:
-	if path.get_extension() == "tscn":
-		if template_data.MakeDirectory(path.left(-5)):
-			var template: Array = template_data.data[scene_label.text].scene
-			
-			for dependency in template:
-				print(dependency[1], path.left(-5) + "/" + dependency[0] + ".tscn")
-				ResourceSaver.save(dependency[1], path.left(-5) + "/" + dependency[0] + ".tscn")
-	else:
-		dialog.NewAlert("invalid save, tscn expected")
+	if event is InputEventKey and event.keycode == KEY_ENTER and rename.has_focus():
+		ResetCaret.call_deferred()
+		
+		if event.pressed:
+			if template_data.Rename(scene_label.text, rename.text):
+				rename.release_focus()
+				rename.visible = false
+			else:
+				Dialog.NewAlert("Invalid Name, \"" + rename.text + "\" already exists")
+				rename.release_focus()
+				rename.visible = false

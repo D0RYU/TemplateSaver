@@ -1,36 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://72fhx3u2t68e"]
+[gd_scene load_steps=4 format=3 uid="uid://72fhx3u2t68e"]
 
 [ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SceneUI/BuiltIn/BIDoubleClick.gd" id="1_xlxnk"]
 [ext_resource type="Texture2D" uid="uid://bow4cj2twp8y0" path="res://addons/TemplateSaver/Images/PackedScene.png" id="2_d3i46"]
 
-[node name="SceneUI" type="HBoxContainer"]
-mouse_filter = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsjgt"]
+resource_local_to_scene = true
+bg_color = Color(0.160784, 0.301961, 0.34902, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
 
-[node name="Margin" type="MarginContainer" parent="."]
-layout_mode = 2
+[node name="BISceneUI" type="MarginContainer" node_paths=PackedStringArray("scene_label")]
+offset_right = 89.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
 tooltip_text = "Scene 1
-
 Type: Scene
-Path: res://TemplateSaver/Scenes/Templates/Scene 1
-.dat"
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
+Path: res://TemplateSaver/Scenes/Templates/Scene 1.dat"
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_right = 7
 script = ExtResource("1_xlxnk")
+scene_label = NodePath("Panel/Info/Label")
 
-[node name="Info" type="HBoxContainer" parent="Margin"]
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_xsjgt")
+
+[node name="Info" type="HBoxContainer" parent="Panel"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Margin/Info"]
+[node name="Icon" type="TextureRect" parent="Panel/Info"]
+modulate = Color(0.424807, 0.748603, 0.900824, 1)
 layout_mode = 2
 texture = ExtResource("2_d3i46")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Margin/Info"]
+[node name="Label" type="Label" parent="Panel/Info"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
-text = "Scene 1
-"
+text = "Scene 1"
 vertical_alignment = 1
+text_overrun_behavior = 1
 
-[connection signal="mouse_entered" from="Margin" to="Margin" method="MouseEntered"]
-[connection signal="mouse_exited" from="Margin" to="Margin" method="MouseExited"]
+[connection signal="mouse_entered" from="." to="." method="MouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="MouseExited"]

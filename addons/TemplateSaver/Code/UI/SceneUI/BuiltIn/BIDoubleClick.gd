@@ -1,14 +1,12 @@
 @tool
 extends MarginContainer
 
-@onready var scene_label: Label = get_node("Info/Label")
+@export var scene_label: Label
+
 @onready var scene_path: String = "res://addons/TemplateSaver/Scenes/Templates/" + scene_label.text + ".dat"
 
 var file_manager_scene: PackedScene = preload("res://addons/TemplateSaver/Scenes/FileManager.tscn")
 var mouse_over: bool = false
-var dialog: Object:
-	get:
-		return get_tree().root.get_node("Dialog")
 
 func _ready() -> void:
 	tooltip_text = scene_label.text + "\nType: Scene\nPath: res://TemplateSaver/Scenes/Templates/" + scene_label.text + ".dat"
@@ -38,4 +36,4 @@ func FileSelected(path: String) -> void:
 	if path.get_extension() == "tscn":
 		ResourceSaver.save(template, path)
 	else:
-		dialog.NewAlert("invalid save, tscn expected")
+		Dialog.NewAlert("invalid save, tscn expected")

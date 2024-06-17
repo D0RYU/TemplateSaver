@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/SettingsColor.gd" id="1_mdgqf"]
 [ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/SettingsManager.gd" id="1_vd0k8"]
-[ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/DragSettings.gd" id="2_ehhdn"]
 [ext_resource type="Texture2D" uid="uid://i1d60kad2oj" path="res://addons/TemplateSaver/Images/ResetPathIcon/reset white.png" id="3_um1a1"]
 [ext_resource type="Texture2D" uid="uid://be5wd1fb4jctf" path="res://addons/TemplateSaver/Images/ResetPathIcon/reset blue.png" id="4_1og6j"]
 [ext_resource type="Texture2D" uid="uid://dl0b0cfabm0oi" path="res://addons/TemplateSaver/Images/ResetPathIcon/reset gray.png" id="5_vww0t"]
@@ -10,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/TemplateSaver/Code/UI/SettingsMenu/CloseSettings.gd" id="6_enwyh"]
 [ext_resource type="Texture2D" uid="uid://dlvlmxcsvhbdk" path="res://addons/TemplateSaver/Images/OpenFolderIcon/open blue.png" id="7_5ysrs"]
 [ext_resource type="Texture2D" uid="uid://bcwkjcjlah0wl" path="res://addons/TemplateSaver/Images/OpenFolderIcon/open gray.png" id="8_rm1rd"]
+[ext_resource type="Script" path="res://addons/TemplateSaver/Code/DragUI.gd" id="9_kqw6e"]
 [ext_resource type="Texture2D" uid="uid://3msh86x0yl68" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_red.png" id="10_8sv2e"]
 [ext_resource type="Texture2D" uid="uid://djfo3yavg6eva" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_blue.png" id="11_trvcf"]
 [ext_resource type="Texture2D" uid="uid://8dcg2arthixt" path="res://addons/TemplateSaver/Images/CloseIcon/close_icon_gray.png" id="12_xv6cd"]
@@ -40,7 +40,7 @@ anchors_preset = -1
 anchor_right = 0.999997
 anchor_bottom = 0.0757576
 grow_horizontal = 2
-color = Color(0.424807, 0.748603, 0.900824, 1)
+color = Color(0.423529, 0.74902, 0.901961, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Outline" type="ColorRect" parent="."]
@@ -67,7 +67,7 @@ grow_vertical = 2
 color = Color(0.0705882, 0.161765, 0.164706, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="VBoxContainer" parent="Bottom"]
+[node name="Settings" type="VBoxContainer" parent="Bottom" node_paths=PackedStringArray("open_path", "reset_path", "option_button", "check_button")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,6 +75,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vd0k8")
+open_path = NodePath("PathContainer/Path")
+reset_path = NodePath("PathContainer/Reset")
+option_button = NodePath("EditorContainer/OptionButton")
+check_button = NodePath("PrintContainer/CheckButton")
 
 [node name="PathContainer" type="HBoxContainer" parent="Bottom/Settings"]
 layout_mode = 2
@@ -119,6 +123,41 @@ stretch_mode = 5
 [node name="ColorRect2" type="ColorRect" parent="Bottom/Settings/PathContainer"]
 layout_mode = 2
 
+[node name="EditorContainer" type="HBoxContainer" parent="Bottom/Settings"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Bottom/Settings/EditorContainer"]
+layout_mode = 2
+
+[node name="EditorLocation" type="Label" parent="Bottom/Settings/EditorContainer"]
+layout_mode = 2
+text = "Location:"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Bottom/Settings/EditorContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Bottom"
+popup/item_0/id = 1
+popup/item_1/text = "Dock"
+popup/item_1/id = 2
+
+[node name="PrintContainer" type="HBoxContainer" parent="Bottom/Settings"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Bottom/Settings/PrintContainer"]
+layout_mode = 2
+
+[node name="ShowPrint" type="Label" parent="Bottom/Settings/PrintContainer"]
+layout_mode = 2
+text = "Show Prints:"
+vertical_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Bottom/Settings/PrintContainer"]
+layout_mode = 2
+button_pressed = true
+
 [node name="Shadow" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -131,7 +170,7 @@ grow_vertical = 2
 color = Color(0.0564706, 0.129412, 0.131765, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Top" type="ColorRect" parent="."]
+[node name="Top" type="ColorRect" parent="." node_paths=PackedStringArray("parent", "moveables")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0115607
@@ -140,7 +179,9 @@ anchor_right = 0.991327
 anchor_bottom = 0.0735931
 grow_horizontal = 2
 color = Color(0.0941176, 0.215686, 0.219608, 1)
-script = ExtResource("2_ehhdn")
+script = ExtResource("9_kqw6e")
+parent = NodePath("..")
+moveables = [NodePath("../Highlight"), NodePath("../Outline"), NodePath("../Shadow"), NodePath(".")]
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Top"]
@@ -178,15 +219,8 @@ stretch_mode = 5
 script = ExtResource("6_enwyh")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="mouse_entered" from="Highlight" to="Top" method="MouseEntered"]
-[connection signal="mouse_exited" from="Highlight" to="Top" method="MouseExited"]
-[connection signal="mouse_entered" from="Outline" to="Top" method="MouseEntered"]
-[connection signal="mouse_exited" from="Outline" to="Top" method="MouseExited"]
 [connection signal="pressed" from="Bottom/Settings/PathContainer/Reset" to="Bottom/Settings" method="ResetDataPath"]
 [connection signal="pressed" from="Bottom/Settings/PathContainer/Path" to="Bottom/Settings" method="ChangeDataPath"]
 [connection signal="pressed" from="Bottom/Settings/PathContainer/Open" to="Bottom/Settings" method="DataPathOpened"]
-[connection signal="mouse_entered" from="Shadow" to="Top" method="MouseEntered"]
-[connection signal="mouse_exited" from="Shadow" to="Top" method="MouseExited"]
-[connection signal="mouse_entered" from="Top" to="Top" method="MouseEntered"]
-[connection signal="mouse_exited" from="Top" to="Top" method="MouseExited"]
+[connection signal="toggled" from="Bottom/Settings/PrintContainer/CheckButton" to="Bottom/Settings" method="ShowPrint"]
 [connection signal="pressed" from="Top/Close" to="Top/Close" method="OnPressed"]

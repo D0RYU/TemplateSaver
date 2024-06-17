@@ -2,4 +2,4 @@
 extends TextureButton
 
 func OnPressed() -> void:
-	get_node("../..").queue_free()
+	get_owner().queue_free()
